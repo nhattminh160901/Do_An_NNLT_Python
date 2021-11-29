@@ -1,16 +1,18 @@
-from allclass import *
+from test import *
 
-student = Student('Le Quang Nhat', 'Minh', 21, 'male', '0898989898', 'minh@gmail.com', '20E1020074')
+student = Student('Minh', 'Le Quang Nhat', 21, 'male', '0898989898', 'minh@gmail.com', '20E1020074')
 cs = Course('Engineer', student)
-print(student.updateInformationStudent())
-# sp = Specialization('KHDL&TTNT', cs)
-# print(sp.addClass())
+sp = Specialization('KTD&TDH', cs)
+print(sp.addClass())
 
-# lec = Lecturer('Vo Quang', 'Nha', 35, 'male', '0989898989', 'nha@gmail.com', 'TS', 'Electronic', sp)
-# print(lec.addLecturerTeachStudent())
+lec = Lecturer('Nha', 'Vo Quang', 35, 'male', '0989898989', 'nha@gmail.com', 'TS', 'Electronic')
 
-# union = Union(False, student)
-# print(union.UnionMember())
+term = Terms(['KTD&TDH'],[4], lec, sp)
+print(term.lecturerName())
+print(term.className())
 
-# clb = Club(['robot', 'football'], student)
-# print(clb.addClub())
+union = YouthUnion(True, student)
+print(union.UnionMember())
+
+clb = Club(['robot', 'football'], student)
+print(clb.addClub())
