@@ -2,25 +2,24 @@ from test1 import *
 
 class ManagementAll:
     def inputStudent(self, firstName:str, lastName:str, age:int, sex:str, phoneNumber:str, email:str, studentNumber:str):
-        sv = Student(firstName, lastName, age, sex, phoneNumber, email, studentNumber)
-        return sv
+        st = Student(firstName, lastName, age, sex, phoneNumber, email, studentNumber)
+        return st
 
     def inputCourse(self, courseType:int, specializationName:str, ternName:list, credits:list):
         course = Course(courseType)
         term = Terms(specializationName, course, ternName, credits)
         return term
     
-    def inputLecturer(self, firstName:str, lastName:str, age:int, sex:str, phoneNumber:str, email:str, degreeType:str, major:str):
-        lec = Lecturer(firstName, lastName, age, sex, phoneNumber, email, degreeType, major)
+    def inputLecturer(self, firstName:str, lastName:str, age:int, sex:str, phoneNumber:str, email:str, degreeType:str, major:str, classTerm:str):
+        lec = Lecturer(firstName, lastName, age, sex, phoneNumber, email, degreeType, major, classTerm)
         return lec
 
-    def getListStudent(self, inputStudent, inputCourse, emptyList:list):
-        emptyList.append(inputStudent.informationStudentCourse(inputCourse))
-        return emptyList
+    def addStudenttoList(self, inputStudent, inputCourse, listStudent:list):
+        listStudent.append(inputStudent.informationStudentCourse(inputCourse))
+        return listStudent
 
-
-    def addStudentToClass(self, inputLecturer, listStudent:list, className:str):
-        return inputLecturer.memberClass(className, listStudent)
+    def addStudentToClass(self, inputLecturer, listStudent:list):
+        return inputLecturer.memberClass(listStudent)
 
     def getGPA(self, processPoint:float=0.0, examPoint:float=0.0):
         sp = StudyPoint(processPoint, examPoint)
@@ -32,23 +31,27 @@ class ManagementAll:
         rank = Rank(sp, tp)
         return rank.ranked()
 
-    def addYUM(self, YUM:bool, inputStudent):
+    def addYUMList(self, YUM:bool, inputStudent):
         yum = YouthUnion(YUM, inputStudent)
         yum.addYouthUnionMember()
         return yum.youthUnionMember()
-        
-td = {}   
-zz = []
-mng = ManagementAll()
-z = 0
-sv = mng.inputStudent('Minh', 'Le Quang Nhat', 21, 'male', '8484848', 'minh@gmail.com', '123456')
-check = input("Ban co phai la Doan Vien?(Y/N)")
-if check in 'Yy':
-    checkYUM = True
-elif check in 'Nn':
-    checkYUM = False
-YUm = mng.addYUM(checkYUM, sv)
-print(YUm)
+
+    def findStudentbyRank(self, listStudent:list, rank:str):
+        for i in listStudent:
+            if i[12] == rank:
+                print(i)
+
+    def findStudentbyClass(self, listStudent:list, className:str):
+        for i in listStudent:
+            termName = i[9]
+            for j in termName:
+                if j == className:
+                    print(i)
+
+# td = {}   
+# zz = []
+# mng = ManagementAll()
+# sv = mng.inputStudent('Minh', 'Le Quang Nhat', 21, 'male', '8484848', 'minh@gmail.com', '123456')
 # course = mng.inputCourse(1, 'KHDL&TTNT', ['NNLTPython', 'THUD'], [4, 4])
 # mng.getListStudent(sv, course, zz)
 # sv = mng.inputStudent('Tri', 'Ho Minh', 21, 'male', '8484848', 'minh@gmail.com', '123456')

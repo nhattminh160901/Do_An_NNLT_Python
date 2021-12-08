@@ -31,7 +31,7 @@ class Specialization:
     def getClassType(self):
         return self.course.getCourseName()
 
-    def getClassName(self):
+    def getSpecializationName(self):
         return self.specializationName
 
 class Terms(Specialization):
@@ -74,7 +74,7 @@ class Student(Person):
 
     def informationStudentCourse(self, term):
         self.term = term
-        return  self.getInformation() + (self.studentNumber, self.term.getClassType(), self.term.getClassName(), self.term.getTermsandCredits())
+        return  self.getInformation() + (self.studentNumber, self.term.getClassType(), self.term.getSpecializationName(), self.term.getTermsandCredits())
 
     def addListStudent(self, listStudent:list):
         self.listStudent = listStudent
@@ -83,21 +83,25 @@ class Student(Person):
 
 class Lecturer(Person):
     stu: Student
-    def __init__(self, firstName:str, lastName:str, age:int, sex:str, phoneNumber:str, email:str, degreeType:str, major:str):
+    def __init__(self, firstName:str, lastName:str, age:int, sex:str, phoneNumber:str, email:str, degreeType:str, major:str, classTerm:str):
         Person.__init__(self, firstName, lastName, age, sex, phoneNumber, email)
         self.degreeType = degreeType
         self.major = major
+        self.classTerm = classTerm
 
     def getInformationLecturer(self):
-        return self.getInformation() + (self.degreeType, self.major)
+        return self.getInformation() + (self.degreeType, self.major, self.classTerm)
 
-    def memberClass(self, className:str, listStudent):
-        self.className = className
+    def getClassName(self):
+        return self.className
+
+    def memberClass(self, listStudent):
         self.listStudent = listStudent
         self.listClass = []
         for i in self.listStudent:
-            for j in i:
-                if j == self.className:
+            termName = i[9]
+            for j in termName:
+                if self.classTerm == j:
                     self.listClass.append((i[0], i[1]))
                     break
         return self.listClass
@@ -159,3 +163,16 @@ class Rank:
             return 'Weak'
         else:
             return 'Poor'
+
+# abc = []
+# a = Course(1)
+# b = Terms('KHDL&TTNT', a, ['NNLTPython', 'TinHocUngDung'], [4,4])
+# stu = Student('Minh', 'Le Quang Nhat', 21, 'male', '8484848', 'minh@gmail.com', '123456')
+# stu.informationStudentCourse(b)
+# stu.addListStudent(abc)
+# stu = Student('Tri', 'Ho Minh', 21, 'male', '8484848', 'minh@gmail.com', '123456')
+# stu.informationStudentCourse(b)
+# stu.addListStudent(abc)
+# lec = Lecturer('Cuong', 'Nguyen Dinh Hoa', 21, 'male', '848484', 'cuong@gmail.com', 'TS', 'AI')
+# lec.addStudentClass('KHDL&TTNT', abc)
+# print(lec.getStudentClass())
