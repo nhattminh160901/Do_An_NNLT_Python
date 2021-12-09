@@ -1,4 +1,4 @@
 # Do_An_NNLT_Python
-Run main
+Run main.py
 
 Run alltasks.py after finish main.py
