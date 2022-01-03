@@ -1,3 +1,4 @@
+from typing import Any
 from manage import *
 
 class FrontProgram:
@@ -55,12 +56,12 @@ class FrontProgram:
         course = mng.inputCourse(coursetype, specName, listTerms, listCredits)
         return sv, course
 
-    def addStudentToList(self, informationStudent:tuple, listStudent:list):
+    def addStudentToList(self, informationStudent:tuple, listStudent:list) -> list:
         mng = ManagementAll()
         mng.addStudenttoList(informationStudent[0], informationStudent[1], listStudent)
         return listStudent
 
-    def manageYUM(self, informationStudent:tuple, managerYUM:list):
+    def manageYUM(self, informationStudent:tuple, managerYUM:list) -> list:
         mng = ManagementAll()
         print("Are you a Youth Union member?")
         while True:
@@ -97,7 +98,7 @@ class FrontProgram:
         allClass[lec.getFullName()+(lec.getClassName(),)] = mng.addStudentToClass(lec, listStudent)
         return allClass and listLecturer
 
-    def addPointsAndRanks(self, listStudent:list):
+    def addPointsAndRanks(self, listStudent:list) -> list:
         find = 0
         check = 0
         mng = ManagementAll()
@@ -119,18 +120,18 @@ class FrontProgram:
             print("Student Information is not found")
         return listStudent
 
-    def findStudentbyFullName(self, listStudent:list):
+    def findStudentbyFullName(self, listStudent:list) -> None:
         mng = ManagementAll()
         fN = input("First Name: ")
         lN = input("Last Name: ")
         mng.findByFullName(fN, lN, listStudent)
 
-    def findStudentbyClass(self, listStudent:list):
+    def findStudentbyClass(self, listStudent:list) -> None:
         mng = ManagementAll()
         cN = input("Class Name: ")
         mng.findByClass(listStudent, cN)
 
-    def findStudentbySex(self, listStudent:list):
+    def findStudentbySex(self, listStudent:list) -> None:
         mng = ManagementAll()
         print("1. Male\n2. Female")
         choose = input("Your choose: ")
@@ -140,7 +141,7 @@ class FrontProgram:
         if choose == 2:
             mng.findBySex(listStudent, "Female")
 
-    def findStudentbyRank(self, listStudent:list):
+    def findStudentbyRank(self, listStudent:list) -> None:
         mng = ManagementAll()
         print("1. Very Good\n2. Good\n3. Average\n4. Weak\n5. Poor")
         choose = input("Your choose: ")
@@ -156,7 +157,7 @@ class FrontProgram:
         if choose == 5:
             mng.findByRank(listStudent, "Poor")
     
-    def sortStudentsList(self, listStudent):
+    def sortStudentsList(self, listStudent) -> list:
         mng = ManagementAll()
         print("Choose condition to sort: ")
         print("1. Sort by First Name\n2. Sort by GPA\n3. Sort by Training Point")
